@@ -18,7 +18,6 @@ def display_inventory(inventory):
         print(f"{str(item_count)} {item_name} ")
         item_total += item_count
 
-    print("*****************************************")
     print(f"Total number of items: {str(item_total)}")
 
     if 60 <= item_total <= 69:
@@ -50,8 +49,11 @@ def add_to_inventory(inventory, new_items):
             added_items_count += 1
 
     print(f"Total number of added items: {str(added_items_count)}")
+
     print("Skipped Trash:")
-    print(pprint.pprint(skipped_items))
+    for item_name, item_count in skipped_items.items():
+        print(f"{str(item_count)} {item_name}")
+
     return inventory
 
 
