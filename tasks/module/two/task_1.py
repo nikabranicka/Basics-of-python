@@ -19,7 +19,7 @@ def display_inventory(inventory):
     item_total = 0
 
     for item_name, item_count in inventory.items():
-        print(f"{item_count} {item_name} ")
+        print(f"{item_count} {item_name}")
         item_total += item_count
 
     print(f"Total number of items: {str(item_total)}")
@@ -36,15 +36,13 @@ display_inventory(stuff)
 
 
 def add_to_inventory(inventory, new_items):
-    skipped_items = {}
+    skipped_items = defaultdict(int)
+
     added_items_count = 0
 
     for item in new_items:
         if item in trash:
-            if item in skipped_items:
-                skipped_items[item] += 1
-            else:
-                skipped_items[item] = 1
+            skipped_items[item] += 1
         else:
             if item in inventory:
                 inventory[item] += 1
