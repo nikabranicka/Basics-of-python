@@ -52,11 +52,11 @@ def add_to_inventory(inventory, new_items):
                 inventory[item] = 1
             added_items_count += 1
 
-    print(f"Total number of added items: {str(added_items_count)}")
+    print(f"Total number of added items: {added_items_count}")
 
     print("Skipped Trash:")
     for item_name, item_count in skipped_items.items():
-        print(f"{str(item_count)} {item_name}")
+        print(f"{item_count} {item_name}")
 
     return inventory
 
