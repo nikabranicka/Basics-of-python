@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 stuff = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
 
 my_inventory = {'gold coin': 42, 'rope': 1}
@@ -7,22 +9,26 @@ dragon_loot = ['gold coin', 'chewed gum', 'dagger', 'gold coin', 'gold coin', 'r
 
 trash = ['rubbish', 'chewed gum', 'used tissue']
 
+LIGHT_WEIGHT_THRESHOLD = 60
+HEAVY_WEIGHT_THRESHOLD = 70
+MAX_CAPACITY_THRESHOLD = 80
+
 
 def display_inventory(inventory):
     print("Inventory:")
     item_total = 0
 
     for item_name, item_count in inventory.items():
-        print(f"{str(item_count)} {item_name} ")
+        print(f"{item_count} {item_name} ")
         item_total += item_count
 
     print(f"Total number of items: {str(item_total)}")
 
-    if 60 <= item_total <= 69:
+    if LIGHT_WEIGHT_THRESHOLD <= item_total < HEAVY_WEIGHT_THRESHOLD:
         print("CAUTION: Your backpack weighs a lot, your stamina runs out quicker!")
-    elif 70 <= item_total <= 79:
+    elif HEAVY_WEIGHT_THRESHOLD <= item_total < MAX_CAPACITY_THRESHOLD:
         print("CAUTION: Your equipment is very heavy, you're moving slower than usual!")
-    elif item_total >= 80:
+    elif item_total >= MAX_CAPACITY_THRESHOLD:
         print("CAUTION: You are overloaded, can't move!")
 
 
