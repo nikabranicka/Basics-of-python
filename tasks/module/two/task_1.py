@@ -7,7 +7,7 @@ my_inventory = {'gold coin': 42, 'rope': 1}
 dragon_loot = ['gold coin', 'chewed gum', 'dagger', 'gold coin', 'gold coin', 'ruby', 'rubbish', 'chewed gum',
                'used tissue']
 
-trash = ['rubbish', 'chewed gum', 'used tissue']
+items_to_skip = ['rubbish', 'chewed gum', 'used tissue']
 
 LIGHT_WEIGHT_THRESHOLD = 60
 HEAVY_WEIGHT_THRESHOLD = 70
@@ -17,11 +17,9 @@ MAX_CAPACITY_THRESHOLD = 80
 def display_inventory(inventory):
     print("Inventory:")
     item_total = 0
-
     for item_name, item_count in inventory.items():
         print(f"{item_count} {item_name}")
         item_total += item_count
-
     print(f"Total number of items: {str(item_total)}")
 
     if LIGHT_WEIGHT_THRESHOLD <= item_total < HEAVY_WEIGHT_THRESHOLD:
@@ -41,7 +39,7 @@ def add_to_inventory(inventory, new_items):
     added_items_count = 0
 
     for item in new_items:
-        if item in trash:
+        if item in items_to_skip:
             skipped_items[item] += 1
         else:
             if item in inventory:
@@ -52,7 +50,7 @@ def add_to_inventory(inventory, new_items):
 
     print(f"Total number of added items: {added_items_count}")
 
-    print("Skipped Trash:")
+    print("Skipped Items:")
     for item_name, item_count in skipped_items.items():
         print(f"{item_count} {item_name}")
 
