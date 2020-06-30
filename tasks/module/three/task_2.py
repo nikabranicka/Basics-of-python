@@ -20,6 +20,12 @@ def my_split(string_to_split, splitter):
     return split_result
 
 
+@pytest.mark.parametrize("text_to_split,splitter",
+                         [('abd acd', ' ')])
+def test_my_split(text_to_split, splitter):
+    assert my_split(text_to_split, splitter) == text_to_split.split(splitter)
+
+
 @pytest.mark.parametrize("text_to_split,splitter,expected_result",
                          [('a,b', ',', ['a', 'b']),
                           ('a1b', '1', ['a', 'b']),
