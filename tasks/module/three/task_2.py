@@ -4,7 +4,20 @@ NO_SPLITTER_ERROR_MESSAGE = "Splitter is not provided"
 
 
 def my_split(string_to_split, splitter):
-    return string_to_split.split(splitter)
+    if splitter == "":
+        raise ValueError(NO_SPLITTER_ERROR_MESSAGE)
+
+    split_result = []
+    text = ''
+    for character in string_to_split:
+        if character == splitter:
+            split_result.append(text)
+            text = ''
+        else:
+            text = text + character
+    if not text == '':
+        split_result.append(text)
+    return split_result
 
 
 @pytest.mark.parametrize("text_to_split,splitter,expected_result",
