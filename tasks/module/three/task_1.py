@@ -51,7 +51,11 @@ def make_sandwich():
     return sandwich
 
 
-def sum_up_order(ordered_sandwich):
+def sum_up_order(ordered_sandwich: dict):
+    """
+    Method responsible for mapping from ingredients names to their prices and printing the sandwich
+    content along with total price for selected amount of sandwiches.
+    """
     print("How many sandwiches do you want to order?")
     number_of_sandwiches = pyip.inputInt(min=1)
     total_price = sum(ordered_sandwich.values()) * number_of_sandwiches
