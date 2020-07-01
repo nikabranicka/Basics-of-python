@@ -3,7 +3,7 @@ import pytest
 NO_SPLITTER_ERROR_MESSAGE = "Splitter is not provided"
 
 
-def my_split(string_to_split, splitter):
+def my_split(string_to_split, splitter=' '):
     if splitter == "":
         raise ValueError(NO_SPLITTER_ERROR_MESSAGE)
 
@@ -38,6 +38,12 @@ def test_my_split(text_to_split, splitter):
                           ('ab ba', ' ', ['ab', 'ba'])])
 def test_my_split_basic_split(text_to_split, splitter, expected_result):
     assert my_split(text_to_split, splitter) == expected_result
+
+
+@pytest.mark.parametrize("text_to_split,expected_result",
+                         [("a b c", ['a', 'b', 'c'])])
+def test_my_split_not_provided_splitter(text_to_split, expected_result):
+    assert my_split(text_to_split) == expected_result
 
 
 @pytest.mark.parametrize("text_to_split,splitter",
