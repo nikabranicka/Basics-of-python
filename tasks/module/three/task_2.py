@@ -42,7 +42,6 @@ def test_my_split_basic_split(text_to_split, splitter, expected_result):
 
 @pytest.mark.parametrize("text_to_split,splitter",
                          [('abcd', '')])
-def test_my_split_empty_splitter(text_to_split, splitter, ):
-    with pytest.raises(ValueError) as actual_error_message:
-        assert my_split(text_to_split, splitter)
-    assert str(actual_error_message.value) == NO_SPLITTER_ERROR_MESSAGE
+def test_my_split_empty_splitter(text_to_split, splitter):
+    with pytest.raises(ValueError, match=NO_SPLITTER_ERROR_MESSAGE):
+        my_split(text_to_split, splitter)
