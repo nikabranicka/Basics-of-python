@@ -12,14 +12,14 @@ def select_bread():
     print("What kind of bread do you prefer?")
     bread_type_list = list(bread_type_and_price.keys())
     selected_bread_type = pyip.inputMenu(bread_type_list, lettered=True)
-    return {selected_bread_type: bread_type_and_price.get(selected_bread_type)}
+    return {selected_bread_type: bread_type_and_price[selected_bread_type]}
 
 
 def select_protein():
     print("What kind of protein do you prefer?")
     protein_type_list = list(protein_type_and_price.keys())
     selected_protein_type = pyip.inputMenu(protein_type_list, lettered=True)
-    return {selected_protein_type: protein_type_and_price.get(selected_protein_type)}
+    return {selected_protein_type: protein_type_and_price[selected_protein_type]}
 
 
 def select_cheese():
@@ -29,7 +29,7 @@ def select_cheese():
         print("What kind of cheese do you prefer?")
         cheese_type_list = list(cheese_type_and_price.keys())
         selected_cheese_type = pyip.inputMenu(cheese_type_list, lettered=True)
-        return {selected_cheese_type: cheese_type_and_price.get(selected_cheese_type)}
+        return {selected_cheese_type: cheese_type_and_price[selected_cheese_type]}
 
 
 def select_sauce():
@@ -39,15 +39,19 @@ def select_sauce():
         print("What kind of sauce do you prefer?")
         sauce_type_list = list(sauce_type_and_price.keys())
         selected_sauce_type = pyip.inputMenu(sauce_type_list, lettered=True)
-        return {selected_sauce_type: sauce_type_and_price.get(selected_sauce_type)}
+        return {selected_sauce_type: sauce_type_and_price[selected_sauce_type]}
 
 
 def make_sandwich():
     sandwich = {}
     sandwich.update(select_bread())
     sandwich.update(select_protein())
-    sandwich.update(select_cheese())
-    sandwich.update(select_sauce())
+    selected_cheese = select_cheese()
+    if selected_cheese is not None:
+        sandwich.update(selected_cheese)
+    selected_sauce = select_sauce()
+    if selected_sauce is not None:
+        sandwich.update(selected_sauce)
     return sandwich
 
 
