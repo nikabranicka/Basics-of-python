@@ -3,4 +3,3 @@ pydocstyle
 flake8
 PyInputPlus
 pytest
-
