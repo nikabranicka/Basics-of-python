@@ -1,6 +1,6 @@
 import pyinputplus as pyip
 
-BREAD_TYPE_AND_PRICE= {"Wheat Bread": 5, "White Bread": 4, "Sourdough Bread": 6}
+BREAD_TYPE_AND_PRICE = {"Wheat Bread": 5, "White Bread": 4, "Sourdough Bread": 6}
 PROTEIN_TYPE_AND_PRICE = {"Chicken": 5, "Turkey": 6, "Ham": 4, "Tofu": 5}
 CHEESE_TYPE_AND_PRICE = {"Cheddar": 5, "Swiss": 6, "Mozzarella": 7}
 SAUCE_TYPE_AND_PRICE = {"Mayo": 1, "Mustard": 2, "Lettuce": 3, "Tomato": 4}
