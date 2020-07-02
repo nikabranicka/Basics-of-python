@@ -28,6 +28,7 @@ def select_cheese():
         cheese_type_list = list(CHEESE_TYPE_AND_PRICE.keys())
         selected_cheese_type = pyip.inputMenu(cheese_type_list, lettered=True)
         return {selected_cheese_type: CHEESE_TYPE_AND_PRICE[selected_cheese_type]}
+    return None
 
 
 def select_sauce():
@@ -38,6 +39,7 @@ def select_sauce():
         sauce_type_list = list(SAUCE_TYPE_AND_PRICE.keys())
         selected_sauce_type = pyip.inputMenu(sauce_type_list, lettered=True)
         return {selected_sauce_type: SAUCE_TYPE_AND_PRICE[selected_sauce_type]}
+    return None
 
 
 def make_sandwich():
