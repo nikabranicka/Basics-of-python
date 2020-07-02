@@ -1,5 +1,5 @@
-import pytest
 import re
+import pytest
 
 NO_SPLITTER_ERROR_MESSAGE = "Splitter is not provided"
 
@@ -19,7 +19,6 @@ def my_split(string_to_split, splitter=None, max_split=-1):
         if splitter_position == -1:
             split_result.append(string_to_split)
             string_to_split = ''
-            break
         else:
             split_result.append(string_to_split[0:splitter_position])
             string_to_split = string_to_split[splitter_position + len(splitter):]
