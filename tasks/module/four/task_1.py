@@ -46,4 +46,5 @@ def main():
     save_new_text_to_new_file(new_text)
 
 
-main()
+if __name__ == "__main__":
+    main()
