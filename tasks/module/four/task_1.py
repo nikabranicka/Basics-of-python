@@ -11,7 +11,7 @@ part_of_speech = [ADJECTIVE, NOUN, ADVERB, VERB]
 
 def replace_given_part_of_speech(part: str, sentence: str):
     """
-        Method responsible for replacing specific part of speech with proposed word.
+        Method responsible for replacing first occurrence of specific part of speech with proposed word.
     """
     print(f"Enter a {part.lower()}: ")
     new_word = pyip.inputStr()
