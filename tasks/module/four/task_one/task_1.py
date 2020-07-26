@@ -1,12 +1,9 @@
 from datetime import datetime
 import pyinputplus as pyip
 
-ADJECTIVE = 'ADJECTIVE'
-NOUN = 'NOUN'
-ADVERB = 'ADVERB'
-VERB = 'VERB'
-
-part_of_speech = [ADJECTIVE, NOUN, ADVERB, VERB]
+EXTENSION = 'txt'
+BASIC_FILE = 'Sentences.txt'
+part_of_speech = ['ADJECTIVE', 'NOUN', 'ADVERB', 'VERB']
 
 
 def replace_given_part_of_speech(part: str, sentence: str):
@@ -22,7 +19,7 @@ def replace_parts_of_speech_in_text():
     """
         Method responsible for replacing parts of speech from "Sentence.txt" file with words proposed by user.
     """
-    file_text = open("Sentences.txt", "r").read()
+    file_text = open(BASIC_FILE, 'r').read()
     for word in file_text.split():
         for key in part_of_speech:
             if key in word:
@@ -35,7 +32,8 @@ def save_new_text_to_new_file(new_text: str):
         Method responsible for generating new txt file and saving given text to it.
     """
     print("New sentence is: " + new_text)
-    file_name = str(datetime.now().hour) + '.txt'
+    current_time = datetime.now()
+    file_name = str(f'{current_time.hour}{current_time.minute}{current_time.second}.{EXTENSION}')
     new_file = open(file_name, "w+")
     new_file.write(new_text)
     new_file.close()

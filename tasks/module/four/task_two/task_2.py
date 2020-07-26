@@ -54,7 +54,7 @@ def add_missing_files():
     """
     spam_files = os.listdir(SPAM_PATH)
     if not spam_files:
-        raise ValueError("Given path is not working")
+        raise FileNotFoundError("Given path is not working")
 
     list_of_numbers = get_and_sort_list_of_numbers_from_gathered_files(spam_files)
     files_to_create = detect_missing_files(list_of_numbers)
