@@ -4,3 +4,5 @@ flake8
 PyInputPlus
 pytest
 openpyxl
+ezsheets
+PyPDF4
