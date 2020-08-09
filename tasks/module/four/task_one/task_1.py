@@ -1,9 +1,10 @@
 from datetime import datetime
 import pyinputplus as pyip
+import re
 
 EXTENSION = 'txt'
 BASIC_FILE = 'Sentences.txt'
-part_of_speech = ['ADJECTIVE', 'NOUN', 'ADVERB', 'VERB']
+PART_OF_SPEECH = ['ADJECTIVE', 'NOUN', 'ADVERB', 'VERB']
 
 
 def replace_given_part_of_speech(part: str, sentence: str):
@@ -20,10 +21,10 @@ def replace_parts_of_speech_in_text():
         Method responsible for replacing parts of speech from "Sentence.txt" file with words proposed by user.
     """
     file_text = open(BASIC_FILE, 'r').read()
-    for word in file_text.split():
-        for key in part_of_speech:
-            if key in word:
-                file_text = replace_given_part_of_speech(key, file_text)
+
+    for word in re.findall(r'[A-Za-z]+|\S', file_text):
+        if word in PART_OF_SPEECH:
+            file_text = replace_given_part_of_speech(word, file_text)
     return file_text
 
 
