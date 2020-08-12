@@ -1,6 +1,7 @@
+import re
 from datetime import datetime
 import pyinputplus as pyip
-import re
+
 
 EXTENSION = 'txt'
 BASIC_FILE = 'Sentences.txt'
@@ -28,22 +29,18 @@ def replace_parts_of_speech_in_text():
     return file_text
 
 
-def save_new_text_to_new_file(new_text: str):
+def save_new_text_to_new_file(text: str):
     """
         Method responsible for generating new txt file and saving given text to it.
     """
-    print("New sentence is: " + new_text)
+    print("New sentence is: " + text)
     current_time = datetime.now()
     file_name = str(f'{current_time.hour}{current_time.minute}{current_time.second}.{EXTENSION}')
     new_file = open(file_name, "w+")
-    new_file.write(new_text)
+    new_file.write(text)
     new_file.close()
 
 
-def main():
+if __name__ == "__main__":
     new_text = replace_parts_of_speech_in_text()
     save_new_text_to_new_file(new_text)
-
-
-if __name__ == "__main__":
-    main()

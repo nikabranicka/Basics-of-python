@@ -29,9 +29,5 @@ def invert_spreadsheet():
     wb.save(XLSX_FILE_NAME)
 
 
-def main():
-    invert_spreadsheet()
-
-
 if __name__ == "__main__":
-    main()
+    invert_spreadsheet()
