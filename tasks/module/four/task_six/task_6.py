@@ -7,15 +7,16 @@ PDF_FILE = 'SecretFile.pdf'
 POSSIBLE_PASSWORDS = 'dictionary.txt'
 
 passwords = open(POSSIBLE_PASSWORDS, 'r').read()
-list_of_possible_passwords = passwords.split()
 
 pdfReader = PyPDF4.PdfFileReader(open(PDF_FILE, 'rb'))
 
 print('The password is:')
-for word in passwords.split():
-    if pdfReader.decrypt(word.lower()) == 1:
-        print(word.lower())
-        break
-    if pdfReader.decrypt(word) == 1:
-        print(word)
-        break
+with open(POSSIBLE_PASSWORDS) as passwords_file:
+    for word in passwords_file:
+        word = word.replace('\n', '')
+        if pdfReader.decrypt(word.lower()) == 1:
+            print(word.lower())
+            break
+        if pdfReader.decrypt(word) == 1:
+            print(word)
+            break
