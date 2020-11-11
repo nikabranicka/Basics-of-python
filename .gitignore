@@ -130,3 +130,7 @@ dmypy.json
 
 # PyCharm
 .idea
+
+tasks/module/four/task_five/credentials-sheets.json
+tasks/module/four/task_five/token-drive.pickle
+tasks/module/four/task_five/token-sheets.pickle
