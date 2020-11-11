@@ -28,12 +28,20 @@ class Inventory:
         self.inventory = []
 
     def get_inventory_weight(self):
+        """
+           Method responsible for getting inventory weight
+        """
+
         total_weight = 0
         for item in self.inventory:
             total_weight += item.weight
         return total_weight
 
     def display_inventory(self):
+        """
+           Method responsible for displaying inventory and weight status
+        """
+
         print("Inventory:")
         total_weight = 0
         for item in self.inventory:
@@ -49,6 +57,10 @@ class Inventory:
             print("CAUTION: You are overloaded, can't move!")
 
     def add_to_inventory(self, new_item: Item):
+        """
+           Method responsible for adding item to inventory
+        """
+
         skipped_items = defaultdict(int)
 
         added_items_count = 0
@@ -60,6 +72,16 @@ class Inventory:
             added_items_count += 1
 
         return self.inventory
+
+    def remove_item_from_inventory_due_to_overweight(self, total_weight):
+        """
+           Method responsible for removing random item, when hero can not lift anymore
+        """
+
+        while total_weight >= MAX_CAPACITY_THRESHOLD:
+            removed_item = self.inventory.pop(0)
+            print('Removing an item: ' + removed_item.name)
+            total_weight = self.get_inventory_weight()
 
 
 if __name__ == '__main__':

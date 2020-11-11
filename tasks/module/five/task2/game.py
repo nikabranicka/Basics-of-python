@@ -1,22 +1,16 @@
 import random
+import sys
 
-from tasks.module.five.task1.Inventory import Item, Inventory, LIGHT_WEIGHT_THRESHOLD, HEAVY_WEIGHT_THRESHOLD, \
+from tasks.module.five.task1.inventory import Item, Inventory, LIGHT_WEIGHT_THRESHOLD, HEAVY_WEIGHT_THRESHOLD, \
     MAX_CAPACITY_THRESHOLD, Food
 
-potential_items = [Item("Hammer", 10, 100), Food('Beef', 2, 10), Food('Herbs', 1, 10), Item("Axe", 5, 50),
-                   Item("Sword", 10, 100), Food('Apple', 1, 4), Item("Dragon Head", 12, 1000)]
+potential_items = [Item("Hammer", 5, 100), Food('Beef', 2, 10), Food('Herbs', 1, 10), Item("Axe", 5, 50),
+                   Item("Sword", 5, 100), Food('Apple', 1, 4), Item("Dragon Head", 10, 1000)]
 
 
 class Game:
     my_inventory = Inventory()
     my_inventory.display_inventory()
-
-
-def remove_item_from_inventory(total_weight):
-    while total_weight >= MAX_CAPACITY_THRESHOLD:
-        removed_item = game.my_inventory.inventory.pop(0)
-        print('Removing an item: ' + removed_item.name)
-        total_weight = game.my_inventory.get_inventory_weight()
 
 
 class Board:
@@ -46,6 +40,10 @@ class Board:
         print('Board contains ' + str(len(self.items_positions)) + ' items.')
 
     def display_board(self):
+        """
+           Method responsible for displaying current state of board
+        """
+
         wall = self.wall_start + self.wall_unit * self.board_width
         print(wall)
         for i in range(self.board_height):
@@ -60,6 +58,10 @@ class Board:
             print(wall)
 
     def move_player(self, direction):
+        """
+           Method responsible for moving player in specified direction
+        """
+
         if direction == 'up':
             if self.player_position_y == 0:
                 print("~~You hit the top wall! Try moving in a different direction~~")
@@ -94,15 +96,23 @@ class Board:
             print('Try moving again.')
 
     def check_item(self):
+        """
+           Method responsible for checking found items
+        """
+
         current_position = self.player_position_x, self.player_position_y
         if current_position in self.items_positions:
-            item = random.choice(potential_items)  # TODO add randomization
+            item = random.choice(potential_items)
             print('Found a >> ' + item.name + "<<!")
             game.my_inventory.add_to_inventory(item)
             game.my_inventory.display_inventory()
             self.items_positions.remove(current_position)
 
     def check_stamina(self):
+        """
+           Method responsible for controlling stamina level
+        """
+
         total_weight = game.my_inventory.get_inventory_weight()
         stamina_used = 10
         if LIGHT_WEIGHT_THRESHOLD <= total_weight < HEAVY_WEIGHT_THRESHOLD:
@@ -113,23 +123,23 @@ class Board:
             stamina_used = self.heavy_stamina
         elif total_weight >= MAX_CAPACITY_THRESHOLD:
             print("CAUTION: You are overloaded, need to throw something away...")
-            remove_item_from_inventory(total_weight)
+            game.my_inventory.remove_item_from_inventory_due_to_overweight(total_weight)
             return False
         if self.stamina - stamina_used >= 0:
             self.stamina -= stamina_used
             print('Used ' + str(stamina_used) + ' stamina')
             return True
-        else:
-            print('Stamina level is ' + str(self.stamina) + ' but you need ' + str(stamina_used) + ' to move!')
-            if not (any(isinstance(x, Food) for x in game.my_inventory.inventory)):
-                print('No food in inventory, game over!')
-                exit('GAME OVER')
-            for item in game.my_inventory.inventory:
-                if isinstance(item, Food):
-                    print('Eating ' + item.name + ' for 50 stamina.')
-                    game.my_inventory.inventory.remove(item)
-                    self.stamina += 50
-                    return False
+
+        print('Stamina level is ' + str(self.stamina) + ' but you need ' + str(stamina_used) + ' to move!')
+        if not (any(isinstance(x, Food) for x in game.my_inventory.inventory)):
+            print('No food in inventory, game over!')
+            sys.exit('GAME OVER')
+        for item in game.my_inventory.inventory:
+            if isinstance(item, Food):
+                print('Eating ' + item.name + ' for 50 stamina.')
+                game.my_inventory.inventory.remove(item)
+                self.stamina += 50
+                return False
 
 
 if __name__ == "__main__":
@@ -143,5 +153,3 @@ if __name__ == "__main__":
         print('Stamina level is ' + str(board.stamina))
         board.move_player(input('Choose a direction to move!\n'))
         board.display_board()
-
-    game.my_inventory.display_inventory()
