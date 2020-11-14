@@ -71,11 +71,14 @@ class Board:
         self.board_height = board_height
         self.item_count = random.randint(1, board_width * board_height - 1)
 
+    def get_random_map_position(self):
+        return {(random.randint(0, self.board_width - 1), random.randint(0, self.board_height - 1))}
+
     def create_map_for_hero(self, hero):
         for _ in range(self.item_count):
-            random_position = {(random.randint(0, self.board_width - 1), random.randint(0, self.board_height - 1))}
+            random_position = self.get_random_map_position()
             while random_position == {(hero.player_position_x, hero.player_position_y)}:
-                random_position = {(random.randint(0, self.board_width - 1), random.randint(0, self.board_height - 1))}
+                random_position = self.get_random_map_position()
             self.items_positions.update(random_position)
         print('Board contains ' + str(len(self.items_positions)) + ' items.')
 
@@ -152,17 +155,23 @@ class Board:
 
 
 class Game:
-    initial_height_and_hero_position = 3
-    hero = Hero(initial_height_and_hero_position)
-    board = Board(3, initial_height_and_hero_position)
+    initial_map_height_and_hero_position = 3
+    initial_map_width = 3
+    hero = Hero(initial_map_height_and_hero_position)
+    board = Board(initial_map_width, initial_map_height_and_hero_position)
     board.create_map_for_hero(hero)
+
+    def start_game(self):
+        game.board.display_board_for(game.hero)
+
+    def play_game(self):
+        while True:
+            print('Stamina level is ' + str(game.hero.stamina))
+            game.board.move_player(game.hero, input('Choose a direction to move!\n'))
+            game.board.display_board_for(game.hero)
 
 
 if __name__ == "__main__":
     game = Game()
-
-    game.board.display_board_for(game.hero)
-    while True:
-        print('Stamina level is ' + str(game.hero.stamina))
-        game.board.move_player(game.hero, input('Choose a direction to move!\n'))
-        game.board.display_board_for(game.hero)
+    game.start_game()
+    game.play_game()
