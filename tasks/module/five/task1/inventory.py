@@ -27,7 +27,7 @@ class Inventory:
     def __init__(self):
         self.inventory = []
 
-    def get_inventory_weight(self):
+    def get_weight(self):
         """
            Method responsible for getting inventory weight
         """
@@ -81,7 +81,7 @@ class Inventory:
         while total_weight >= MAX_CAPACITY_THRESHOLD:
             removed_item = self.inventory.pop(0)
             print('Removing an item: ' + removed_item.name)
-            total_weight = self.get_inventory_weight()
+            total_weight = self.get_weight()
 
 
 if __name__ == '__main__':
