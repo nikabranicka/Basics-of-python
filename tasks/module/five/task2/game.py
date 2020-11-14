@@ -4,9 +4,6 @@ import sys
 from tasks.module.five.task1.inventory import Item, Inventory, LIGHT_WEIGHT_THRESHOLD, HEAVY_WEIGHT_THRESHOLD, \
     MAX_CAPACITY_THRESHOLD, Food
 
-potential_items = [Item("Hammer", 5, 100), Food('Beef', 2, 10), Food('Herbs', 1, 10), Item("Axe", 5, 50),
-                   Item("Sword", 5, 100), Food('Apple', 1, 4), Item("Dragon Head", 10, 1000)]
-
 
 class Hero:
     player_position_x = 0
@@ -65,11 +62,13 @@ class Board:
     board_height = 0
     items_positions = set()
     item_count: int
+    items: list
 
-    def __init__(self, board_width, board_height):
+    def __init__(self, board_width, board_height, items):
         self.board_width = board_width
         self.board_height = board_height
         self.item_count = random.randint(1, board_width * board_height - 1)
+        self.items = items
 
     def get_random_map_position(self):
         return {(random.randint(0, self.board_width - 1), random.randint(0, self.board_height - 1))}
@@ -147,7 +146,7 @@ class Board:
 
         current_position = hero.player_position_x, hero.player_position_y
         if current_position in self.items_positions:
-            item = random.choice(potential_items)
+            item = random.choice(self.items)
             print('Found a >> ' + item.name + "<<!")
             hero.my_inventory.add_to_inventory(item)
             hero.my_inventory.display_inventory()
@@ -158,11 +157,14 @@ class Game:
     initial_map_height_and_hero_position = 3
     initial_map_width = 3
     hero = Hero(initial_map_height_and_hero_position)
-    board = Board(initial_map_width, initial_map_height_and_hero_position)
-    board.create_map_for_hero(hero)
+    board: Board
+
+    def __init__(self, items):
+        self.board = Board(self.initial_map_width, self.initial_map_height_and_hero_position, items)
 
     def start_game(self):
-        game.board.display_board_for(game.hero)
+        self.board.create_map_for_hero(self.hero)
+        self.board.display_board_for(game.hero)
 
     def play_game(self):
         while True:
@@ -172,6 +174,9 @@ class Game:
 
 
 if __name__ == "__main__":
-    game = Game()
+    potential_items = [Item("Hammer", 5, 100), Food('Beef', 2, 10), Food('Herbs', 1, 10), Item("Axe", 5, 50),
+                       Item("Sword", 5, 100), Food('Apple', 1, 4), Item("Dragon Head", 10, 1000)]
+
+    game = Game(potential_items)
     game.start_game()
     game.play_game()
